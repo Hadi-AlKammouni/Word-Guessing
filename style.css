@@ -63,3 +63,15 @@ body {
     font-size: 19px;
     margin-bottom: 10px;
 }
+
+.content .reset-btn {
+    width: 100%;
+    font-size: 17px;
+    padding: 15px 0;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background: #1bb295;
+    border-radius: 5px;
+}
