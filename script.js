@@ -3,10 +3,12 @@ reset_btn = document.querySelector(".reset-btn"),
 hint = document.querySelector(".hint span"),
 typing_input = document.querySelector(".typing-input")
 
+let word;
+
 function randomWord() {
     // getting random object from the wordList list
     let ran_obj = wordList[Math.floor(Math.random() * wordList.length)]
-    let word = ran_obj.word
+    word = ran_obj.word
 
     hint.innerText = ran_obj.hint
 
@@ -22,7 +24,19 @@ randomWord()
 
 function initGame(e) {
     let key = e.target.value
-    console.log(key)
+    if(key.match(/^[A-Za-z]+$/)) {
+        if(word.includes(key)) {
+            // displaying the matching letter
+            for(let i=0; i<word.length; i++) {
+                if(word[i] === key) {
+                    inputs.querySelectorAll("input")[i].value = key
+                }
+            }
+        } else {
+            console.log("letter not found")
+        }
+    }
+    typing_input.value = ""
 }
 
 reset_btn.addEventListener("click", randomWord)
