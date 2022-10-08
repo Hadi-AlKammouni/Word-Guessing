@@ -1,4 +1,5 @@
-const inputs = document.querySelector(".inputs")
+const inputs = document.querySelector(".inputs"),
+reset_btn = document.querySelector(".reset-btn")
 
 function randomWord() {
     // getting random object from the wordList list
@@ -14,3 +15,5 @@ function randomWord() {
 }
 
 randomWord()
+
+reset_btn.addEventListener("click", randomWord)
