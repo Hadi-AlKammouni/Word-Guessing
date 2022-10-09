@@ -1,17 +1,23 @@
 const inputs = document.querySelector(".inputs"),
 reset_btn = document.querySelector(".reset-btn"),
 hint = document.querySelector(".hint span"),
+guesses_left = document.querySelector(".guess-left span"),
 wrong_letter = document.querySelector(".wrong-letter span"),
 typing_input = document.querySelector(".typing-input")
 
-let word, corrects = [], incorrects = []
+let word, max_guesses, corrects = [], incorrects = []
 
 function randomWord() {
     // getting random object from the wordList list
     let ran_obj = wordList[Math.floor(Math.random() * wordList.length)]
     word = ran_obj.word
+    max_guesses = 8
+    corrects = []
+    incorrects = []
 
     hint.innerText = ran_obj.hint
+    guesses_left.innerText = max_guesses
+    wrong_letter.innerText = incorrects
 
     // creating number of empty boxes equal to the word length
     let html = ""
@@ -35,12 +41,21 @@ function initGame(e) {
                 }
             }
         } else {
+            max_guesses--
             incorrects.push(` ${key}`)
         }
+        wrong_letter.innerText = incorrects
+        guesses_left.innerText = max_guesses
     }
 
-    wrong_letter.innerText = incorrects
     typing_input.value = ""
+
+    if(max_guesses < 1) {
+        alert("Game over! Try again.")
+        for (let i=0; i < word.length; i++) {
+            inputs.querySelectorAll("input")[i].value = word[i]
+        }
+    }
 }
 
 reset_btn.addEventListener("click", randomWord)
