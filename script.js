@@ -50,14 +50,20 @@ function initGame(e) {
 
     typing_input.value = ""
 
-    if(max_guesses < 1) {
-        alert("Game over! Try again.")
-        for (let i=0; i < word.length; i++) {
-            inputs.querySelectorAll("input")[i].value = word[i]
+    setTimeout(() => {
+        if (corrects.length === word.length) {
+            alert(`Congrats! You won by finding the correct word: ${word.toUpperCase()}`)
+            randomWord()
+        } else if(max_guesses < 1) {
+            alert("Game over! Try again.")
+            for (let i=0; i < word.length; i++) {
+                inputs.querySelectorAll("input")[i].value = word[i]
+            }
         }
-    }
+    })
 }
 
 reset_btn.addEventListener("click", randomWord)
 typing_input.addEventListener("input", initGame)
+inputs.addEventListener("click", () => typing_input.focus())
 document.addEventListener("keydown", () => typing_input.focus())
